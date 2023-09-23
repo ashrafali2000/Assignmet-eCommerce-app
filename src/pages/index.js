@@ -1,8 +1,8 @@
 import Image from 'next/image'
 import Navbar from '@/components/navBar'
-import {UserContext} from "../context/userContext"
 import { useState } from 'react'
 import AuthHandler from '@/context/authHandler';
+import UserContext from '@/context/userContext';
 
 
 
@@ -11,11 +11,12 @@ export default function Home() {
 
   return (
     <div>
-  <UserContext.Provider value ={ {
-      isloggedIn : userLogged
-    }}>
-     <AuthHandler></AuthHandler>
-  </UserContext.Provider>
+<UserContext.Provider value={{
+  isLoggedIn : userLogged,
+}}>
+
+     <AuthHandler />
+</UserContext.Provider>
       <Navbar></Navbar>
       <h1>Home Page</h1>
     </div>
