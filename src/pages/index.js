@@ -14,9 +14,9 @@ export default function Home() {
 <UserContext.Provider value={{
   isLoggedIn : userLogged,
 }}>
-
      <AuthHandler />
 </UserContext.Provider>
+
       <Navbar></Navbar>
       <h1>Home Page</h1>
     </div>

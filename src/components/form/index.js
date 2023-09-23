@@ -1,10 +1,32 @@
 import Image from "next/image"
 import logo from "../../../public/logo.png"
 import Link from "next/link"
-export default function Form({signUp}) {
+import { useRef } from "react"
+export default function Form({signUp,onFormSubmit}) {
+const firstNameRef = useRef()
+const lastNameRef = useRef()
+const emailRef = useRef()
+const passwordRef = useRef()
+const imageRef = useRef()
+
+ const submitHandler = (event) => {
+ event.preventDefault();
+ const firstName = firstNameRef.current.value;
+ const lastName = lastNameRef.current.value;
+ const email = emailRef.current.value;
+ const password = passwordRef.current.value;
+ const image = imageRef.current.value;
+if(signUp){
+  onFormSubmit(firstName,lastName,email,password,image);
+}
+else{
+ onFormSubmit(firstName,lastName,email,password)
+}
+ 
+}
+
     return (
       <>
-      
         <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
           <div className="sm:mx-auto sm:w-full sm:max-w-sm">
             <Image
@@ -19,7 +41,7 @@ export default function Form({signUp}) {
           </div>
   
           <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-            <form className="space-y-6" action="#" method="POST">
+            <form className="space-y-6" onSubmit={submitHandler}>
           {signUp ? <div>
             <div>
                 <label htmlFor="fname" className="block text-sm font-medium leading-6 text-gray-900">
@@ -29,9 +51,10 @@ export default function Form({signUp}) {
                   <input
                     id="fname"
                     name="fname"
-                    type="email"
+                    type="text"
                     autoComplete="fname"
                     required
+                    ref={firstNameRef}
                     className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                   />
                 </div>
@@ -44,9 +67,10 @@ export default function Form({signUp}) {
                   <input
                     id="lname"
                     name="lname"
-                    type="lname"
+                    type="text"
                     autoComplete="lname"
                     required
+                    ref={lastNameRef}
                     className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                   />
                 </div>
@@ -63,6 +87,7 @@ export default function Form({signUp}) {
                     type="email"
                     autoComplete="email"
                     required
+                    ref={emailRef}
                     className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                   />
                 </div>
@@ -82,6 +107,7 @@ export default function Form({signUp}) {
                     type="password"
                     autoComplete="current-password"
                     required
+                    ref={passwordRef}
                     className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                   />
                 </div>
@@ -101,6 +127,7 @@ export default function Form({signUp}) {
                     type="url"
                     autoComplete="usrImg"
                     required
+                    ref={imageRef}
                     className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                   />
                 </div>
